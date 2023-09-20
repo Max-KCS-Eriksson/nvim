@@ -121,6 +121,16 @@ return {
       -- Nvim-CMP setup
       local cmp = require("cmp")
 
+      local function get_entry_filter_function()
+        return function()
+          local context = require("cmp.config.context")
+          return not context.in_treesitter_capture("comment")
+              and not context.in_syntax_group("Comment")
+              and not context.in_treesitter_capture("string")
+              and not context.in_syntax_group("String")
+        end
+      end
+
       ---@diagnostic disable-next-line: missing-fields
       cmp.setup({
         snippet = {
@@ -161,10 +171,7 @@ return {
             name = "luasnip",
             group_index = 1,
             option = { use_show_condition = true },
-            entry_filter = function()
-              local context = require("cmp.config.context")
-              return not context.in_treesitter_capture("string") and not context.in_syntax_group("String")
-            end,
+            entry_filter = get_entry_filter_function(),
           },
           { name = "buffer" },
           { name = "path" },
@@ -190,10 +197,7 @@ return {
             name = "luasnip",
             group_index = 1,
             option = { use_show_condition = true },
-            entry_filter = function()
-              local context = require("cmp.config.context")
-              return not context.in_treesitter_capture("string") and not context.in_syntax_group("String")
-            end,
+            entry_filter = get_entry_filter_function(),
           },
           { name = "neorg" },
         }),
