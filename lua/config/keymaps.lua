@@ -28,6 +28,17 @@ map("n", "<leader>tt", function()
   os.execute(cmd .. cwd)
 end, { desc = "Terminal in CWD" })
 
+-- Open personal project notes
+map("n", "<leader>on", function()
+  local cwd = os.getenv("PWD")
+  local note_file = cwd .. "/notes.norg"
+  if vim.fn.filereadable(note_file) == 1 and vim.fn.filewritable(note_file) == 1 then
+    vim.cmd.edit(note_file)
+  else
+    print("No note file found in " .. cwd)
+  end
+end, { desc = "Open root/dir/notes.norg file" })
+
 -- Move blocks of code in visual mode
 map("v", "J", ":m-2<CR>gv=gv", { desc = "Move block down" })
 map("v", "K", ":m'>+<CR>gv=gv", { desc = "Move block up" })
