@@ -1,4 +1,15 @@
 -- BUG: Stylua doesn't work expectedly when using these
+local filetype_exclude = {
+  "help",
+  "alpha",
+  "dashboard",
+  "neo-tree",
+  "Trouble",
+  "lazy",
+  "mason",
+  "neorg",
+}
+
 return {
   -- Indent guides for Neovim
   {
@@ -6,7 +17,7 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     opts = {
       char = "▏", -- Suggestions: '|', '¦', '┆', '┊', '┃', '║', '▏'
-      filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
+      filetype_exclude = filetype_exclude,
       show_trailing_blankline_indent = false,
       show_current_context = false,
     },
@@ -23,15 +34,7 @@ return {
     },
     init = function()
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = {
-          "help",
-          "alpha",
-          "dashboard",
-          "neo-tree",
-          "Trouble",
-          "lazy",
-          "mason",
-        },
+        pattern = filetype_exclude,
         callback = function()
           vim.b.miniindentscope_disable = true
         end,
