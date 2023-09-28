@@ -133,6 +133,7 @@ return {
       hl(0, "@variable", variable_style)
       hl(0, "@lsp.type.variable", variable_style)
       hl(0, "@lsp.typemod.variable.readonly", constant_style)
+      hl(0, "@lsp.typemod.parameter.readonly", constant_style)
       hl(0, "@lsp.type.parameter", variable_style) -- Parameters in method code block
       hl(0, "@parameter", parameter_style)
       hl(0, "@lsp.typemod.parameter.declaration", parameter_style)
