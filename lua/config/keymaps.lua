@@ -30,12 +30,18 @@ end, { desc = "Terminal in CWD" })
 
 -- Open personal project notes
 map("n", "<leader>on", function()
+  local util = require("util")
   local cwd = os.getenv("PWD")
   local note_file = cwd .. "/notes.norg"
-  if vim.fn.filereadable(note_file) == 1 and vim.fn.filewritable(note_file) == 1 then
-    vim.cmd.edit(note_file)
-  else
-    print("No note file found in " .. cwd)
+
+  if not util.open_existing_writable(note_file) then
+    local git_root = util.get_git_root()
+    if git_root then
+      note_file = git_root .. "/notes.norg"
+      util.open_existing_writable(note_file)
+    else
+      print("No note file found in " .. cwd)
+    end
   end
 end, { desc = "Open root/dir/notes.norg file" })
 
