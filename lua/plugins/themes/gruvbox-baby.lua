@@ -138,6 +138,7 @@ return {
       hl(0, "@parameter", parameter_style)
       hl(0, "@lsp.typemod.parameter.declaration", parameter_style)
       hl(0, "@variable.builtin", variable_special_style)
+      hl(0, "@property", property_style)
       hl(0, "@lsp.type.property", property_style)
       hl(0, "@field", field_style)
       hl(0, "@lsp.type.class", class_style)
