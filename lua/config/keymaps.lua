@@ -9,6 +9,9 @@ map("n", "<leader>w", "<cmd>w<cr>", { desc = "Write" })
 map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
 
 map("n", "<leader><leader>", "<C-6>", { desc = "Jump to previous buffer" }) -- <C-6> should be the same as <C-^>
+map("n", "<A-Tab>", "<C-w>w", { desc = "Switch windows" })
+map("n", "<leader>sv", "<C-w>v", { desc = "Split vertically" })
+map("n", "<leader>sh", "<C-w>s", { desc = "Split horizontally" })
 
 -- Clear search highlight
 map({ "n", "i", "v" }, "<esc>", "<esc><cmd>noh<cr>", { desc = "Clear search highlight" })
