@@ -1,0 +1,10 @@
+-- Create a `workspaces.lua` file in this dir, which is gitignored.
+-- Additional Neorg workspaces other than the ones listed in
+-- `nvim/lua/config/init.lua` can be created here.
+--
+-- Use the following format in the `workspaces.lua` file:
+--
+-- local neorg_home = os.getenv("NEORG_HOME") or vim.loop.os_homedir() .. "/Documents/neorg"
+-- return {
+--   workspace_name = neorg_home .. "/workspace_name",
+-- }

@@ -4,9 +4,8 @@ local M = {}
 local neorg_home = os.getenv("NEORG_HOME") or vim.loop.os_homedir() .. "/Documents/neorg"
 M.neorg = {
   home = neorg_home,
-  default_workspace = "main",
+  default_workspace = "todo",
   workspaces = {
-    main = neorg_home .. "/main",
     todo = neorg_home .. "/todo",
     notes = neorg_home .. "/notes",
   },
@@ -18,6 +17,7 @@ M.neorg = {
     },
   },
 }
+M.neorg.workspaces = vim.tbl_extend("error", require("config.neorg.workspaces"), M.neorg.workspaces)
 
 -- Set colorscheme
 -- Use name of lua file in the `nvim/lua/plugins/themes/` directory to specify
