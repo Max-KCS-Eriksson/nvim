@@ -24,7 +24,7 @@ return {
 
       local modules = {
         ["core.defaults"] = {}, -- Loads default behaviour
-        ["core.dirman"] = { -- Neorg workspaces
+        ["core.dirman"] = {     -- Neorg workspaces
           config = {
             workspaces = workspaces,
             default_workspace = default_workspace,
@@ -36,7 +36,7 @@ return {
             icon_preset = icon_presets.diamond,
             icons = {
               todo = {
-                pending = { icon = "" },
+                pending = { icon = "" },
                 on_hold = { icon = "" },
               },
             },
