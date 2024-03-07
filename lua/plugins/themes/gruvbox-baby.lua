@@ -178,6 +178,7 @@ return {
 
       -- UI
       hl(0, "VirtColumn", { link = "IndentBlanklineChar" })
+      hl(0, "IndentChar", { fg = colors.cursor_line })
       hl(0, "MiniIndentscopeSymbol", { fg = colors.comment })
 
       -- Diagnostics

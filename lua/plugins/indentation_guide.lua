@@ -14,13 +14,20 @@ return {
   -- Indent guides for Neovim
   {
     "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
     event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      char = "▏", -- Suggestions: '|', '¦', '┆', '┊', '┃', '║', '▏'
-      filetype_exclude = filetype_exclude,
-      show_trailing_blankline_indent = false,
-      show_current_context = false,
-    },
+    config = function()
+      require("ibl").setup({
+        indent = {
+          char = "▏", -- Suggestions: '|', '¦', '┆', '┊', '┃', '║', '▏'
+          highlight = "IndentChar",
+        },
+        exclude = {
+          filetypes = filetype_exclude,
+        },
+        scope = { enabled = false },
+      })
+    end,
   },
 
   -- Active indent guide and indent text objects
