@@ -4,7 +4,7 @@ return {
   -- https://github.com/nvim-neorg/norg-specs/blob/main/1.0-specification.norg
   {
     "nvim-neorg/neorg",
-    run = ":Neorg sync-parsers",
+    build = ":Neorg sync-parsers",
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
