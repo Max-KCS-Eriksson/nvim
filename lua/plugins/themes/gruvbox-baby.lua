@@ -267,6 +267,7 @@ return {
       hl(0, "@neorg.links.description.norg", { fg = colors.light_blue, underline = true })
       hl(0, "@neorg.markup.verbatim.norg", { bg = colors.background_dark, fg = colors.light_blue })
       hl(0, "@neorg.tags.ranged_verbatim.code_block", { bg = colors.background_dark })
+      hl(0, "@neorg.todo_items.urgent.norg", { link = "DiagnosticWarn" })
     end,
   },
 }
