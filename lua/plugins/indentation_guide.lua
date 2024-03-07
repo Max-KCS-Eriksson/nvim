@@ -20,7 +20,6 @@ return {
       require("ibl").setup({
         indent = {
           char = indent_char,
-          highlight = "IndentChar",
         },
         exclude = {
           filetypes = filetype_exclude,
