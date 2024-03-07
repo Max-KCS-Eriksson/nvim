@@ -1,4 +1,4 @@
--- BUG: Stylua doesn't work expectedly when using these
+local indent_char = require("config").indent_char
 local filetype_exclude = {
   "help",
   "alpha",
@@ -19,7 +19,7 @@ return {
     config = function()
       require("ibl").setup({
         indent = {
-          char = "▏", -- Suggestions: '|', '¦', '┆', '┊', '┃', '║', '▏'
+          char = indent_char,
           highlight = "IndentChar",
         },
         exclude = {
@@ -36,7 +36,7 @@ return {
     version = false,
     event = { "BufReadPre", "BufNewFile" },
     opts = {
-      symbol = "▏", -- Suggestions: '|', '¦', '┆', '┊', '┃', '║', '▏'
+      symbol = indent_char,
       options = { try_as_border = true },
     },
     init = function()

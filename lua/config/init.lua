@@ -32,6 +32,8 @@ local borderchars = {
 }
 M.borderchars = borderchars[M.window_border]
 
+M.indent_char = "▏" -- Suggestions: '|', '¦', '┆', '┊', '┃', '║', '▏'
+
 M.diagnostic = {
   format = "[#{c}] #{m} (#{s})",
   options = {
