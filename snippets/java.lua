@@ -44,4 +44,13 @@ return {
       {}
     )
   ),
+  snip(
+    { trig = "varargs", name = "Param taking an arbitrary number of args" },
+    ls_fmt(
+      [[
+      {}... {}
+      ]],
+      { insert_node(1, "type"), insert_node(2, "param") }
+    )
+  ),
 }
