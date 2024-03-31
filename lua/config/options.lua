@@ -31,11 +31,11 @@ o.splitbelow = true
 
 o.swapfile = false
 o.backup = false
-o.undodir = os.getenv("XDG_STATE_HOME") .. "/nvim/undo/" -- Undotree access
-o.undofile = true                                        -- Save undo history
+o.undodir = { os.getenv("XDG_STATE_HOME") .. "/nvim/undo/" } -- Undotree access
+o.undofile = true                                            -- Save undo history
 
-o.hlsearch = true                                        -- `:noh` clears the highlighting
-o.incsearch = true                                       -- Lower-case search match upper-case
+o.hlsearch = true                                            -- `:noh` clears the highlighting
+o.incsearch = true                                           -- Lower-case search match upper-case
 
 -- Case insensitive searching UNLESS /C or capital in search
 o.ignorecase = true
