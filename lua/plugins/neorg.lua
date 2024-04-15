@@ -49,6 +49,7 @@ return {
           },
         },
         ["core.summary"] = { config = { strategy = "default" } },
+        ["core.export"] = {},
         ["core.export.markdown"] = {}, -- Convert to markdown files
         ["core.qol.toc"] = { config = { close_after_use = true } },
         ["core.keybinds"] = {
