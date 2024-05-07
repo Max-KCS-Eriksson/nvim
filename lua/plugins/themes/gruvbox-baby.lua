@@ -10,6 +10,9 @@ return {
       vim.g.gruvbox_baby_keyword_style = "NONE"
       vim.g.gruvbox_baby_function_style = "NONE"
 
+      -- Use above settings
+      vim.cmd.colorscheme("gruvbox-baby")
+
       -- Override default colors, and add new ones
       local config = require("gruvbox-baby.config")
       local c = require("gruvbox-baby.colors")
@@ -33,7 +36,7 @@ return {
       colors.secondary_dim = colors.blue_gray
       colors.floating_window_bg = colors.background
 
-      -- Use above settings and overrides
+      -- Apply above overrides
       vim.g.gruvbox_baby_color_overrides = colors
       vim.cmd.colorscheme("gruvbox-baby")
 
