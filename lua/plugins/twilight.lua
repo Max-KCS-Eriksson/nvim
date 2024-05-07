@@ -1,6 +1,10 @@
 local colors = require("gruvbox-baby.colors").config(require("gruvbox-baby.config"))
 local map = vim.keymap.set
 
+local exclude_ft = { -- Exclude these filetypes
+  "gitcommit",
+}
+
 return {
   "folke/twilight.nvim",
   opts = {
@@ -20,9 +24,27 @@ return {
       "table",
       "if_statement",
     },
-    exclude = {}, -- Exclude these filetypes
+    exclude = exclude_ft, -- Exclude these filetypes,
   },
   config = function()
     map("n", "<leader>tz", ":Twilight<cr>", { desc = "Twilight - dim inactive portions of the code" })
+
+    -- Toggle Twilight by default
+    vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+      pattern = "*",
+      group = vim.api.nvim_create_augroup("auto_toggle_twilight", { clear = true }),
+      callback = function()
+        local toggle_twilight = true
+        for i, ft in ipairs(exclude_ft) do
+          if ft == vim.bo.ft then
+            vim.cmd("TwilightDisable")
+            toggle_twilight = false
+          end
+        end
+        if toggle_twilight then
+          vim.cmd("TwilightEnable")
+        end
+      end,
+    })
   end,
 }
