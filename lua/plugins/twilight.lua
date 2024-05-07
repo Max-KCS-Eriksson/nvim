@@ -22,4 +22,7 @@ return {
     },
     exclude = {}, -- Exclude these filetypes
   },
+  config = function()
+    map("n", "<leader>tz", ":Twilight<cr>", { desc = "Twilight - dim inactive portions of the code" })
+  end,
 }
