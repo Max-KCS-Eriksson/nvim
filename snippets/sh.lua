@@ -51,4 +51,5 @@ return {
       { insert_node(1, "prompt_message") }
     )
   ),
+  snip({ trig = "here", name = "Parent dir of file" }, ls_fmt("$(dirname $0)", {})),
 }
