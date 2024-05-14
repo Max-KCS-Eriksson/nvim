@@ -18,12 +18,16 @@ end
 
 -- Filesystem
 
+function M.is_git_root(dir)
+  return vim.fn.isdirectory(dir .. "/.git") == 1
+end
+
 function M.get_git_root()
   for dir in vim.fs.parents(vim.loop.cwd()) do
     if dir == os.getenv("HOME") then
       break
     end
-    if vim.fn.isdirectory(dir .. "/.git") == 1 then
+    if M.is_git_root(dir) then
       return dir
     end
   end
