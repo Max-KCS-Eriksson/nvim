@@ -76,7 +76,7 @@ return {
           desc = "Find buffers",
         },
         {
-          "<leader>fh",
+          "<leader>f?",
           "<cmd>Telescope help_tags<cr>", -- TODO: Use with `util.telescope` for dynamic `layout_strategy`
           desc = "Find help tags",
         },
