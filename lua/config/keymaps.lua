@@ -45,7 +45,7 @@ map("n", "<leader>on", function()
       note_file = git_root .. "/notes.norg"
       util.open_existing_writable(note_file)
     else
-      print("No note file found in " .. cwd)
+      print("notes.norg not found in " .. cwd)
     end
   end
 end, { desc = "Open root/dir/notes.norg file" })
