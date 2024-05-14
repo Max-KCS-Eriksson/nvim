@@ -23,14 +23,24 @@ function M.is_git_root(dir)
 end
 
 function M.get_git_root()
-  for dir in vim.fs.parents(vim.loop.cwd()) do
-    if dir == os.getenv("HOME") then
-      break
-    end
-    if M.is_git_root(dir) then
-      return dir
+  local cwd = vim.loop.cwd()
+  local git_root = nil
+
+  if M.is_git_root(cwd) then
+    git_root = cwd
+  else
+    for dir in vim.fs.parents(cwd) do
+      if dir == os.getenv("HOME") then
+        break
+      end
+      if M.is_git_root(dir) then
+        git_root = dir
+        break
+      end
     end
   end
+
+  return git_root
 end
 
 -- Creates directory if it doesn't exist
