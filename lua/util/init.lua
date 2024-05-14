@@ -20,6 +20,9 @@ end
 
 function M.get_git_root()
   for dir in vim.fs.parents(vim.loop.cwd()) do
+    if dir == os.getenv("HOME") then
+      break
+    end
     if vim.fn.isdirectory(dir .. "/.git") == 1 then
       return dir
     end
