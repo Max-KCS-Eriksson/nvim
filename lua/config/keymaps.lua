@@ -43,7 +43,9 @@ map("n", "<leader>on", function()
     local git_root = util.get_git_root()
     if git_root then
       note_file = git_root .. "/notes.norg"
-      util.open_existing_writable(note_file)
+      if not util.open_existing_writable(note_file) then
+        print("notes.norg not found in " .. git_root)
+      end
     else
       print("notes.norg not found in " .. cwd)
     end
