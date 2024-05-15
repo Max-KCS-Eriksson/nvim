@@ -72,43 +72,43 @@ return {
         }, -- Follow vim bindings convention
         {
           "<leader>fb",
-          "<cmd>Telescope buffers<cr>", -- TODO: Use with `util.telescope` for dynamic `layout_strategy`
+          util.telescope("buffers"),
           desc = "Find buffers",
         },
         {
           "<leader>f?",
-          "<cmd>Telescope help_tags<cr>", -- TODO: Use with `util.telescope` for dynamic `layout_strategy`
+          util.telescope("help_tags"),
           desc = "Find help tags",
         },
 
         -- Diagnostics
         {
           "<leader>f!d",
-          "<cmd>Telescope diagnostics<cr>", -- TODO: Use with `util.telescope` for dynamic `layout_strategy`
+          util.telescope("diagnostics"),
           desc = "Diagnostics",
         },
 
         -- Suggestions
         {
           "<leader>!s",
-          "<cmd>Telescope spell_suggest<cr>", -- TODO: Use with `util.telescope` for dynamic `layout_strategy`
+          util.telescope("spell_suggest"),
           desc = "Spell suggest",
         },
 
         -- Git
         {
           "<leader>fgf",
-          "<cmd>Telescope git_files<cr>", -- TODO: Use with `util.telescope` for dynamic `layout_strategy`
+          util.telescope("git_files"),
           desc = "Find git files",
         },
         {
           "<leader>fgc",
-          "<cmd>Telescope git_commits<cr>", -- TODO: Use with `util.telescope` for dynamic `layout_strategy`
+          util.telescope("git_commits"),
           desc = "Git commits diffs",
         },
         {
           "<leader>fgs",
-          "<cmd>Telescope git_status<cr>", -- TODO: Use with `util.telescope` for dynamic `layout_strategy`
+          util.telescope("git_status"),
           desc = "Git status diffs",
         },
       }
