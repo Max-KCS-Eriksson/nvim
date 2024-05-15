@@ -102,7 +102,7 @@ end
 -- Telescope helpers
 
 -- Determine telescope layout dynamically
-local function _telescope_layout_strategy()
+function M.telescope_layout_strategy()
   -- Min number of columns for horizontal layout to trigger.
   local columns_breakpoint = 140
   return vim.o.columns > columns_breakpoint and "horizontal" or "vertical"
@@ -112,7 +112,7 @@ end
 function M.telescope(builtin, opts) -- Inspired by lazyvim
   return function()
     require("telescope.builtin")[builtin](
-      vim.tbl_deep_extend("force", { layout_strategy = _telescope_layout_strategy() }, opts or {})
+      vim.tbl_deep_extend("force", { layout_strategy = M.telescope_layout_strategy() }, opts or {})
     )
   end
 end
