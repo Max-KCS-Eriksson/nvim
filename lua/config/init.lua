@@ -1,5 +1,8 @@
 local M = {}
 
+-- Twilight
+M.twilight_auto_toggle = true
+
 -- Neorg
 local neorg_home = os.getenv("NEORG_HOME") or vim.loop.os_homedir() .. "/Documents/neorg"
 M.neorg = {
