@@ -100,6 +100,7 @@ return {
       hl(0, "Visual", { bg = colors.dim })
       hl(0, "VisualNOS", { fg = colors.dim })
       hl(0, "Search", { bg = colors.dim })
+      hl(0, "CurSearch", { bg = colors.dim })
       hl(0, "IncSearch", { bg = colors.dim })
 
       -- Floating windows and completion suggestions
@@ -137,6 +138,7 @@ return {
       hl(0, "@lsp.type.variable", variable_style)
       hl(0, "@lsp.typemod.variable.readonly", constant_style)
       hl(0, "@lsp.typemod.parameter.readonly", constant_style)
+      hl(0, "@lsp.typemod.property.readonly", constant_style)
       hl(0, "@lsp.type.parameter", variable_style) -- Parameters in method code block
       hl(0, "@parameter", parameter_style)
       hl(0, "@variable.parameter", parameter_style)
@@ -147,6 +149,7 @@ return {
       hl(0, "@field", field_style)
       hl(0, "@lsp.type.class", class_style)
       hl(0, "@lsp.typemod.class.importDeclaration", class_style)
+      hl(0, "@lsp.typemod.class.public", class_style)
       hl(0, "@lsp.typemod.class.abstract", abstract_style)
       hl(0, "@lsp.type.interface", interface_style)
       hl(0, "@lsp.typemod.interface.importDeclaration", interface_style)
@@ -162,12 +165,14 @@ return {
       hl(0, "@boolean", boolean_style)
       hl(0, "Number", number_style)
       hl(0, "@number", number_style)
+      hl(0, "Float", number_style)
       hl(0, "@float", number_style)
       hl(0, "@string", string_style)
       hl(0, "@constructor", constructor_style)
       hl(0, "@lsp.mod.constructor", constructor_style)
       hl(0, "@method", method_style)
       hl(0, "@lsp.type.method", method_style)
+      hl(0, "@lsp.typemod.method.public", method_style)
       hl(0, "@function.method", method_style)
       hl(0, "@method.call", method_style)
       hl(0, "@function.method.call", method_style)
