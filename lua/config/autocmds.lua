@@ -145,6 +145,14 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
   command = "set conceallevel=3",
 })
 
+-- Neorg foldmethod workaround
+-- HACK: Manually setting `foldmethod` to enable manual folding through VISUAL and VISUAL LINE mode.
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+  pattern = { "*.norg" },
+  group = vim.api.nvim_create_augroup("neorg_foldmethod_hack", { clear = true }),
+  command = "set foldmethod=manual",
+})
+
 -- Neorg auto inject metadata in new note
 vim.api.nvim_create_autocmd("BufNewFile", {
   pattern = { "*.norg" },
