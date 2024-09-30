@@ -72,12 +72,12 @@ return {
         -- JS & TS
         diagnostics.eslint_d,
         formatting.prettier.with({
-          extra_args = { "--single-quote", "false" },
+          extra_args = { "--single-quote", "false", "--tab-width", "4" },
         }),
 
         -- Java
         formatting.google_java_format.with({
-          extra_args = { "--aosp" },
+          extra_args = { "--aosp" }, -- Indent 4 instead of 2
         }),
 
         -- Kotlin
