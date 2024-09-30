@@ -55,6 +55,7 @@ return {
       local function_style = { fg = colors.clean_green }
       local function_builtin_style = { fg = colors.orange }
       local interface_style = { fg = colors.soft_green, italic = true }
+      local static_style = { italic = true }
       local keyword_style = { fg = colors.red }
       local enum_style = { fg = colors.pink }
       local enum_member_style = constant_style
@@ -151,6 +152,7 @@ return {
       hl(0, "@lsp.typemod.class.importDeclaration", class_style)
       hl(0, "@lsp.typemod.class.public", class_style)
       hl(0, "@lsp.typemod.class.abstract", abstract_style)
+      hl(0, "@lsp.mod.static", static_style)
       hl(0, "@lsp.type.interface", interface_style)
       hl(0, "@lsp.typemod.interface.importDeclaration", interface_style)
       hl(0, "@decorator", decorator_style)
