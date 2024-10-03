@@ -15,6 +15,8 @@ map("n", "<leader>sv", "<C-w>v", { desc = "Split vertically" })
 map("n", "<leader>ss", "<C-w>v", { desc = "Split side" })
 map("n", "<leader>sh", "<C-w>s", { desc = "Split horizontally" })
 
+map("n", "zfs", "<cmd>normal ^zf]i++<cr>", { desc = "Fold scope to bottom" })
+
 -- Clear search highlight
 map({ "n", "i", "v" }, "<esc>", "<esc><cmd>noh<cr>", { desc = "Clear search highlight" })
 map("n", "v", "<cmd>noh<cr>v", { desc = "Clear search highlight when entering Visual" })
