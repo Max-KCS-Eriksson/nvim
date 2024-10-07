@@ -34,7 +34,7 @@ return {
           },
           ["o"] = { name = "+open" },
           ["t"] = { name = "+toggle" },
-          ["s"] = { name = "+split" },
+          ["s"] = { name = "+split/swap" },
           ["l"] = { name = "+list" },
         },
       })
