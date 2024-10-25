@@ -17,7 +17,7 @@ map("n", "<leader>sh", "<C-w>s", { desc = "Split horizontally" })
 
 map("n", "zfs", "<cmd>normal ^[izf]i++<cr>", { desc = "Fold scope to bottom" })
 
-map("n", "<leader>sw", "<cmd>normal yiwwwviwpbbb<cr>viwp<cr>", { desc = "Swap words" })
+map("n", "<leader>sw", "<cmd>normal yiwwviwpbbviwp<cr>", { desc = "Swap words" })
 
 -- Clear search highlight
 map({ "n", "i", "v" }, "<esc>", "<esc><cmd>noh<cr>", { desc = "Clear search highlight" })
