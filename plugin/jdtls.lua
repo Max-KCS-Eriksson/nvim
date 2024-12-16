@@ -83,19 +83,19 @@ local function get_jdtls_paths()
     -- https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
     {
       name = "JavaSE-1.8",
-      path = vim.fn.expand("~/.local/share/mise/installs/java/adoptopenjdk-8.0.392+8/"),
+      path = vim.fn.expand("~/.local/share/mise/installs/java/adoptopenjdk-8"),
     },
     {
       name = "JavaSE-11",
-      path = vim.fn.expand("~/.local/share/mise/installs/java/11.0.2/"),
+      path = vim.fn.expand("~/.local/share/mise/installs/java/11"),
     },
     {
       name = "JavaSE-17",
-      path = vim.fn.expand("~/.local/share/mise/installs/java/17.0.2/"),
+      path = vim.fn.expand("~/.local/share/mise/installs/java/17"),
     },
     {
       name = "JavaSE-21",
-      path = vim.fn.expand("~/.local/share/mise/installs/java/21.0.1/"),
+      path = vim.fn.expand("~/.local/share/mise/installs/java/21"),
     },
   }
 
