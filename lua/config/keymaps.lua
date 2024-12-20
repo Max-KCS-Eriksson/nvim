@@ -15,7 +15,7 @@ map("n", "<leader>sv", "<C-w>v", { desc = "Split vertically" })
 map("n", "<leader>ss", "<C-w>v", { desc = "Split side" })
 map("n", "<leader>sh", "<C-w>s", { desc = "Split horizontally" })
 
-map("n", "zfs", "<cmd>normal ^[izf]i++<cr>", { desc = "Fold scope to bottom" })
+map("n", "zfs", "<cmd>normal ^[izf]i++zt<cr>", { desc = "Fold scope to bottom" })
 
 map("n", "<leader>sw", "<cmd>normal yiwwviwpbbviwp<cr>", { desc = "Swap words" })
 
