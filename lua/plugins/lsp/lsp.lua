@@ -116,7 +116,7 @@ return {
       require("luasnip.loaders.from_vscode").lazy_load()
 
       local snippets_dir = vim.fn.stdpath("config") .. "/snippets"
-      require("luasnip.loaders.from_lua").load({ paths = snippets_dir })
+      require("luasnip.loaders.from_lua").load({ paths = { snippets_dir } })
 
       -- Nvim-CMP setup
       local cmp = require("cmp")
