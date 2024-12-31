@@ -42,7 +42,7 @@ return {
           -- https://github.com/williamboman/mason-lspconfig.nvim#available-lsp-servers
           "html",
           "cssls",
-          "tsserver",
+          "ts_ls",
 
           "pyright",
           "gopls",
