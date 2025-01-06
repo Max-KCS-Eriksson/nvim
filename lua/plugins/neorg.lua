@@ -37,7 +37,8 @@ return {
             icons = {
               todo = {
                 pending = { icon = "" },
-                on_hold = { icon = "" },
+                on_hold = { icon = "" },
+                uncertain = { icon = "?" },
               },
             },
           },
