@@ -190,6 +190,7 @@ return {
       hl(0, "@text.title", { fg = colors.primary, bold = true })
       hl(0, "@text.emphasis", { fg = colors.primary, italic = true })
       hl(0, "@text.strong", { fg = colors.primary, bold = true })
+      hl(0, "htmlEndTag", { link = "htmlTag" })
 
       -- UI
       hl(0, "VirtColumn", { link = "IndentBlanklineChar" })

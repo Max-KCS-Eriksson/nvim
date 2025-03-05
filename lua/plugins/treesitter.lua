@@ -11,7 +11,7 @@ return {
       ---@diagnostic disable-next-line: missing-fields
       configs.setup({
         ensure_installed = {
-          "html",
+          -- "html", -- WARN: Can cause `SEGV` when in insert mode
           "htmldjango",
           "css",
           "javascript",
