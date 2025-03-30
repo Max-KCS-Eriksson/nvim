@@ -1,5 +1,7 @@
 local icons = require("config").icons
 
+vim.opt.showmode = false
+
 return {
   {
     "nvim-lualine/lualine.nvim",
