@@ -92,7 +92,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    map("n", "K", vim.lsp.buf.hover, opts(_opts, "Hover"))
+    map("n", "K", function ()
+      vim.lsp.buf.hover({
+        border = require("config").window_border
+      })
+    end, opts(_opts, "Hover"))
     map("n", "<C-k>", vim.lsp.buf.signature_help, opts(_opts, "Signature help"))
     map("n", "gd", vim.lsp.buf.definition, opts(_opts, "Definition"))
     map("n", "gD", vim.lsp.buf.declaration, opts(_opts, "Declaration"))
