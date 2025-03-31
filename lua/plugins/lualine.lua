@@ -97,7 +97,7 @@ return {
             {
               -- Display active LSP
               function()
-                for _, client in ipairs(vim.lsp.get_active_clients()) do
+                for _, client in ipairs(vim.lsp.get_clients()) do
                   if client.name ~= "null-ls" then
                     return client.name
                   end
