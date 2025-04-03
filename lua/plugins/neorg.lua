@@ -80,19 +80,15 @@ return {
     keys = function()
       local has_wk, wk = pcall(require, "which-key")
       if has_wk then
-        wk.register({
-          ["<leader>n"] = {
-            name = "+neorg",
-          },
-          ["<localleader>"] = {
-            name = "+localleader",
-            ["e"] = { name = "+explore" },
-            ["i"] = { name = "+insert" },
-            ["l"] = { name = "+list" },
-            ["m"] = { name = "+mode" },
-            ["n"] = { name = "+new" },
-            ["t"] = { name = "+task" },
-          },
+        wk.add({
+          { "<leader>n", group = "+neorg" },
+          { "<localleader>", group = "+localleader" },
+          { "<localleader>e", group = "+explore" },
+          { "<localleader>i", group = "+insert" },
+          { "<localleader>l", group = "+list" },
+          { "<localleader>m", group = "+mode" },
+          { "<localleader>n", group = "+new" },
+          { "<localleader>t", group = "+task" },
         })
       end
 

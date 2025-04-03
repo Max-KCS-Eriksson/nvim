@@ -7,10 +7,8 @@ return {
     config = function()
       local map = vim.keymap.set
       local wk = require("which-key")
-      wk.register({
-        ["<leader>om"] = {
-          name = "+markdown",
-        },
+      wk.add({
+        { "<leader>om", group = "+markdown" },
       })
 
       -- Keymaps

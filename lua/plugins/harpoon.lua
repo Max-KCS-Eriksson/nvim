@@ -19,8 +19,8 @@ return {
 
       local has_wk, wk = pcall(require, "which-key")
       if has_wk then
-        wk.register({
-          ["<leader>h"] = { name = "+harpoon" },
+        wk.add({
+          { "<leader>h", group = "+harpoon" },
         })
       end
 

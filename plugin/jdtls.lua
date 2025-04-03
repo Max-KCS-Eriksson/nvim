@@ -129,11 +129,9 @@ local function enable_debugger(bufnr)
   -- Keymaps
   local has_wk, wk = pcall(require, "which-key")
   if has_wk then
-    wk.register({
-      ["<leader>d"] = {
-        name = "+debugger",
-        ["t"] = { name = "+test" },
-      },
+    wk.add({
+      { "<leader>d", group = "+debugger" },
+      { "<leader>dt", group = "+test" },
     })
   end
   map("n", "<leader>dtc", "<cmd>lua require('jdtls').test_class()<cr>", opts(_opts, "Test class"))
@@ -158,11 +156,11 @@ local function jdtls_on_attach(client, bufnr)
   -- Keymaps
   local has_wk, wk = pcall(require, "which-key")
   if has_wk then
-    wk.register({
-      mode = { "n", "v" },
-      ["<leader>c"] = {
-        name = "code",
-        ["e"] = { name = "+extract" },
+    wk.add({
+      {
+        mode = { "n", "v" },
+        { "<leader>c", group = "+code" },
+        { "<leader>ce", group = "+extract" },
       },
     })
   end

@@ -29,12 +29,10 @@ return {
     keys = function()
       local has_wk, wk = pcall(require, "which-key")
       if has_wk then
-        wk.register({
-          ["<leader>f"] = {
-            name = "+find",
-            ["t"] = { name = "+Telescope" },
-            ["g"] = { name = "+git" },
-          },
+        wk.add({
+          { "<leader>f", group = "+find" },
+          { "<leader>ft", group = "+Telescope" },
+          { "<leader>fg", group = "+git" },
         })
       end
 

@@ -16,26 +16,22 @@ return {
     config = function()
       local wk = require("which-key")
       wk.setup({
-        window = {
-          border = defaults.window_border,
-        },
+        win = { border = defaults.window_border },
       })
-      wk.register({
-        mode = { "n", "v" },
-        ["g"] = { name = "+goto" },
-        ["]"] = { name = "+next" },
-        ["["] = { name = "+prev" },
-        ["<leader>"] = {
-          name = "+leader",
-          ["!"] = { name = "+diagnostics/quickfixes" },
-          ["f"] = {
-            name = "+find",
-            ["!"] = { name = "+diagnostics/todo" },
-          },
-          ["o"] = { name = "+open" },
-          ["t"] = { name = "+toggle" },
-          ["s"] = { name = "+split/swap" },
-          ["l"] = { name = "+list" },
+      wk.add({
+        {
+          mode = { "n", "v" },
+          { "g", group = "+goto" },
+          { "]", group = "+next" },
+          { "[", group = "+prev" },
+          { "<leader>", group = "+leader" },
+          { "<leader>!", group = "+diagnostics/quickfixes" },
+          { "<leader>f", group = "+find" },
+          { "<leader>f!", group = "+diagnostics/todo" },
+          { "<leader>o", group = "+open" },
+          { "<leader>t", group = "+toggle" },
+          { "<leader>s", group = "+split/swap" },
+          { "<leader>l", group = "+list" },
         },
       })
     end,

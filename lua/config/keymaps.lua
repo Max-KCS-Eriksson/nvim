@@ -104,10 +104,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     local has_wk, wk = pcall(require, "which-key")
     if has_wk then
-      wk.register({
-        mode = { "n", "v" },
-        ["<leader>c"] = {
-          name = "code",
+      wk.add({
+        {
+          mode = { "n", "v" },
+          { "<leader>c", group = "+code", },
         },
       })
     end
@@ -121,11 +121,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Telescope
     local builtin = require("telescope.builtin")
-    wk.register({
-      ["<leader>f"] = {
-        name = "+find",
-        ["l"] = { name = "+LSP" },
-      },
+    wk.add({
+      { "<leader>f", group = "+find" },
+      { "<leader>fl", group = "+LSP" },
     })
     map("n", "<leader>flt", builtin.treesitter, { desc = "Treesitter nodes" })
     map("n", "<leader>fli", builtin.lsp_implementations, opts(_opts, "Implementation"))
