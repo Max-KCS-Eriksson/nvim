@@ -23,6 +23,9 @@ map("n", "zfm", "<cmd>normal ^[izf]i+]mzt<cr>", { desc = "Fold method" })
 map("n", "<leader>sw", "<cmd>normal yiwwviwpbbviwp<cr>", { desc = "Swap words" })
 map("n", "<leader>sW", "<cmd>normal yiWWviWpbbviWp<cr>", { desc = "Swap WORDS" })
 
+map("n", '<leader>"f', "<cmd>let @+ = expand('%:t')<cr>", { desc = "File name to system clipboard" })
+map("n", '<leader>"F', "<cmd>let @+ = expand('%:p')<cr>", { desc = "Full path/to/file to system clipboard" })
+
 -- Clear search highlight
 map({ "n", "i", "v" }, "<esc>", "<esc><cmd>noh<cr>", { desc = "Clear search highlight" })
 map("n", "v", "<cmd>noh<cr>v", { desc = "Clear search highlight when entering Visual" })

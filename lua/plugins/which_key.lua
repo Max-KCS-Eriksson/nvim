@@ -39,6 +39,7 @@ return {
           { "<leader>t", group = "+toggle" },
           { "<leader>s", group = "+split/swap" },
           { "<leader>l", group = "+list" },
+          { '<leader>"', group = "+copy" },
         },
       })
     end,
