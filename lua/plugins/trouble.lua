@@ -4,6 +4,7 @@ return {
     opts = {
       auto_preview = false,
       focus = true,
+      auto_refresh = false,
     },
     cmd = { "Trouble" },
     keys = {
