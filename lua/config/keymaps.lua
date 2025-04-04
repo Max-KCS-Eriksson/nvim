@@ -6,6 +6,7 @@ local map = vim.keymap.set
 -- Quality of life bindings
 map("n", "<leader>e", vim.cmd.Ex, { desc = "Netrw" })
 map("n", "<leader>w", "<cmd>w<cr>", { desc = "Write" })
+map("n", "<leader>W", "<cmd>noa w<cr>", { desc = "WRITE" })
 map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
 
 map("n", "<leader><leader>", "<C-6>", { desc = "Jump to previous buffer" }) -- <C-6> should be the same as <C-^>
@@ -92,9 +93,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    map("n", "K", function ()
+    map("n", "K", function()
       vim.lsp.buf.hover({
-        border = require("config").window_border
+        border = require("config").window_border,
       })
     end, opts(_opts, "Hover"))
     map("n", "<C-k>", vim.lsp.buf.signature_help, opts(_opts, "Signature help"))
@@ -107,7 +108,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       wk.add({
         {
           mode = { "n", "v" },
-          { "<leader>c", group = "+code", },
+          { "<leader>c", group = "+code" },
         },
       })
     end
@@ -122,7 +123,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- Telescope
     local builtin = require("telescope.builtin")
     wk.add({
-      { "<leader>f", group = "+find" },
+      { "<leader>f",  group = "+find" },
       { "<leader>fl", group = "+LSP" },
     })
     map("n", "<leader>flt", builtin.treesitter, { desc = "Treesitter nodes" })
