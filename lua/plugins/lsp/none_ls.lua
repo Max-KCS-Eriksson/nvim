@@ -2,10 +2,13 @@ local config = require("config")
 local icons = require("config").icons
 
 return {
-  -- Autoinstall linters and diagnostic tools used by `null-ls`.
+  -- Autoinstall linters and diagnostic tools used by `none-ls`.
   "jay-babu/mason-null-ls.nvim",
   dependencies = {
-    { "jose-elias-alvarez/null-ls.nvim" }, -- Linting and diagnostics
+    { -- Linting and diagnostics
+      "nvimtools/none-ls.nvim",
+      dependencies = { "nvimtools/none-ls-extras.nvim" },
+    },
     { "williamboman/mason.nvim" },
     { "nvim-lua/plenary.nvim" },
   },
@@ -22,12 +25,11 @@ return {
       },
     })
 
-    -- Primary Source of Truth is null-ls
+    -- Primary Source of Truth is none-ls
     -- Automatically install sources, but require manual config.
-    local null_ls = require("null-ls")
+    local null_ls = require("null-ls") -- none-ls is drop in replacement for null-ls
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-    local formatting = null_ls.builtins.formatting
-    local diagnostics = null_ls.builtins.diagnostics
+    local builtins = null_ls.builtins
     null_ls.setup({
       border = config.window_border,
       diagnostic_config = {
@@ -39,56 +41,54 @@ return {
       -- Listed sources will be automatically installed by `mason-null-ls`.
       sources = {
         -- Shell script
-        formatting.beautysh.with({ -- multiple shell languages
+        require("none-ls.formatting.beautysh").with({ -- multiple shell languages
           filetypes = { "zsh" },
         }),
-        diagnostics.shellcheck, -- bash only
-        formatting.shellharden, -- bash only
-        formatting.shfmt.with({ -- bash only
+        builtins.formatting.shellharden, -- bash only
+        builtins.formatting.shfmt.with({ -- bash only
           extra_args = { "--indent", "4" },
         }),
 
         -- Lua
-        diagnostics.luacheck,
-        formatting.stylua,
+        builtins.formatting.stylua,
 
         -- Python
-        diagnostics.flake8.with({
+        require("none-ls.diagnostics.flake8").with({
           extra_args = { "--max-line-length", "88", "--ignore=F401,E999,W503,E124" },
         }),
-        formatting.isort,
-        formatting.black,
+        builtins.formatting.isort,
+        builtins.formatting.black,
 
         -- Django
-        diagnostics.djlint.with({
+        builtins.diagnostics.djlint.with({
           extra_args = { "--ignore", "H006", "H031" },
         }),
-        formatting.djlint,
+        builtins.formatting.djlint,
 
         -- Go
-        diagnostics.golangci_lint,
-        formatting.gofumpt,
+        builtins.diagnostics.golangci_lint,
+        builtins.formatting.gofumpt,
 
         -- JS & TS
-        diagnostics.eslint_d,
-        formatting.prettier.with({
+        require("none-ls.diagnostics.eslint_d"),
+        builtins.formatting.prettier.with({
           extra_args = { "--single-quote", "false", "--tab-width", "4" },
         }),
 
         -- Java
-        formatting.google_java_format.with({
+        builtins.formatting.google_java_format.with({
           extra_args = { "--aosp" }, -- Indent 4 instead of 2
         }),
 
         -- Kotlin
-        diagnostics.ktlint,
-        formatting.ktlint,
+        builtins.diagnostics.ktlint,
+        builtins.formatting.ktlint,
 
         -- Docker
-        diagnostics.hadolint,
+        builtins.diagnostics.hadolint,
 
         -- Spelling
-        diagnostics.misspell,
+        builtins.diagnostics.codespell,
       },
       -- Sync Formatting
       on_attach = function(client, bufnr)
