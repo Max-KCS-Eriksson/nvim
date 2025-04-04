@@ -6,8 +6,9 @@ local map = vim.keymap.set
 -- Quality of life bindings
 map("n", "<leader>e", vim.cmd.Ex, { desc = "Netrw" })
 map("n", "<leader>w", "<cmd>w<cr>", { desc = "Write" })
-map("n", "<leader>W", "<cmd>noa w<cr>", { desc = "WRITE" })
+map("n", "<leader>W", "<cmd>noa w<cr>", { desc = "WRITE without autocmd" })
 map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quit" })
+map("n", "<leader>Q", "<cmd>qa<cr>", { desc = "Quit all" })
 
 map("n", "<leader><leader>", "<C-6>", { desc = "Jump to previous buffer" }) -- <C-6> should be the same as <C-^>
 map("n", "<A-Tab>", "<C-w>w", { desc = "Switch windows" })
@@ -123,7 +124,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- Telescope
     local builtin = require("telescope.builtin")
     wk.add({
-      { "<leader>f",  group = "+find" },
+      { "<leader>f", group = "+find" },
       { "<leader>fl", group = "+LSP" },
     })
     map("n", "<leader>flt", builtin.treesitter, { desc = "Treesitter nodes" })
