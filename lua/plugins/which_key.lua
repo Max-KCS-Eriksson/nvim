@@ -17,6 +17,13 @@ return {
       local wk = require("which-key")
       wk.setup({
         win = { border = defaults.window_border },
+        icons = {
+          keys = {
+            C = "<C>",
+            M = "<A>",
+            Tab = "<Tab>",
+          },
+        },
       })
       wk.add({
         {
