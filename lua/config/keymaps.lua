@@ -102,7 +102,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
         border = require("config").window_border,
       })
     end, opts(_opts, "Hover"))
-    map("n", "<C-k>", vim.lsp.buf.signature_help, opts(_opts, "Signature help"))
+    map("n", "<C-k>", function()
+      vim.lsp.buf.signature_help({
+        border = require("config").window_border,
+      })
+    end, opts(_opts, "Signature help"))
     map("n", "gd", vim.lsp.buf.definition, opts(_opts, "Definition"))
     map("n", "gD", vim.lsp.buf.declaration, opts(_opts, "Declaration"))
     map("n", "go", vim.lsp.buf.type_definition, opts(_opts, "Type definition"))
