@@ -3,6 +3,8 @@ local map = vim.keymap.set
 
 local exclude_ft = { -- Exclude these filetypes
   "gitcommit",
+  "gitignore",
+  "diff",
   "norg",
 }
 
