@@ -2,6 +2,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
 local map = vim.keymap.set
+local config = require("config")
 
 -- Quality of life bindings
 map("n", "<leader>e", vim.cmd.Ex, { desc = "Netrw" })
@@ -85,13 +86,13 @@ vim.api.nvim_exec(
 
 -- LSP
 map("n", "<leader>!f", function()
-  vim.diagnostic.open_float({ border = require("config").window_border })
+  vim.diagnostic.open_float({ border = config.window_border })
 end, { desc = "Open float" })
 map("n", "[d", function()
-  vim.diagnostic.goto_prev({ float = { border = require("config").window_border } })
+  vim.diagnostic.goto_prev({ float = { border = config.window_border } })
 end, { desc = "Previous diagnostic" })
 map("n", "]d", function()
-  vim.diagnostic.goto_next({ float = { border = require("config").window_border } })
+  vim.diagnostic.goto_next({ float = { border = config.window_border } })
 end, { desc = "Next diagnostic" })
 
 -- Requires a language server to be attached
@@ -105,12 +106,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     map("n", "K", function()
       vim.lsp.buf.hover({
-        border = require("config").window_border,
+        border = config.window_border,
       })
     end, opts(_opts, "Hover"))
     map("n", "<C-k>", function()
       vim.lsp.buf.signature_help({
-        border = require("config").window_border,
+        border = config.window_border,
       })
     end, opts(_opts, "Signature help"))
     map("n", "gd", vim.lsp.buf.definition, opts(_opts, "Definition"))
