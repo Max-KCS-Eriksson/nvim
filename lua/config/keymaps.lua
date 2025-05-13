@@ -84,9 +84,15 @@ vim.api.nvim_exec(
 )
 
 -- LSP
-map("n", "<leader>!f", "<cmd>lua vim.diagnostic.open_float()<cr>", { desc = "Open float" })
-map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>", { desc = "Previous diagnostic" })
-map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>", { desc = "Next diagnostic" })
+map("n", "<leader>!f", function()
+  vim.diagnostic.open_float({ border = require("config").window_border })
+end, { desc = "Open float" })
+map("n", "[d", function()
+  vim.diagnostic.goto_prev({ float = { border = require("config").window_border } })
+end, { desc = "Previous diagnostic" })
+map("n", "]d", function()
+  vim.diagnostic.goto_next({ float = { border = require("config").window_border } })
+end, { desc = "Next diagnostic" })
 
 -- Requires a language server to be attached
 vim.api.nvim_create_autocmd("LspAttach", {
