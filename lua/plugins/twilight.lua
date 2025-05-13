@@ -34,8 +34,7 @@ return {
 
     -- Toggle Twilight by default
     if require("config").twilight_auto_toggle then
-      vim.api.nvim_create_autocmd({ "VimEnter" }, { -- NOTE: Toggles only on startup
-        -- vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, { -- TODO: Enable using setting, toggle on buff change
+      vim.api.nvim_create_autocmd({ "VimEnter" }, { -- NOTE: Toggles on startup
         pattern = "*",
         group = vim.api.nvim_create_augroup("auto_toggle_twilight", { clear = true }),
         callback = function()
@@ -44,10 +43,26 @@ return {
             if ft == vim.bo.ft then
               vim.cmd("TwilightDisable")
               toggle_twilight = false
+              break
             end
           end
           if toggle_twilight then
             vim.cmd("TwilightEnable")
+          end
+        end,
+      })
+    end
+
+    if require("config").twilight_auto_toggle then
+      vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, { -- NOTE: Toggle off on certain buff change
+        pattern = "*",
+        group = vim.api.nvim_create_augroup("auto_toggle_off_twilight", { clear = true }),
+        callback = function()
+          for i, ft in pairs(exclude_ft) do
+            if vim.bo.ft == ft then
+              vim.cmd("TwilightDisable")
+              break
+            end
           end
         end,
       })
