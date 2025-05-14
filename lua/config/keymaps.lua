@@ -99,7 +99,8 @@ end, { desc = "Next diagnostic" })
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function(ev)
-    local opts = require("util").opts
+    local util = require("util")
+    local opts = util.opts
     local _opts = { buffer = ev.buf }
 
     -- Buffer local mappings.
@@ -136,13 +137,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     -- Telescope
-    local builtin = require("telescope.builtin")
     wk.add({
       { "<leader>f", group = "+find" },
       { "<leader>fl", group = "+LSP" },
     })
-    map("n", "<leader>flt", builtin.treesitter, { desc = "Treesitter nodes" })
-    map("n", "<leader>fli", builtin.lsp_implementations, opts(_opts, "Implementation"))
-    map("n", "<leader>flr", builtin.lsp_references, opts(_opts, "References"))
+    map("n", "<leader>flt", util.telescope("treesitter"), { desc = "Treesitter nodes" })
+    map("n", "<leader>fli", util.telescope("lsp_implementations"), opts(_opts, "Implementation"))
+    map("n", "<leader>flr", util.telescope("lsp_references"), opts(_opts, "References"))
   end,
 })
