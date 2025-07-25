@@ -50,7 +50,9 @@ return {
         }),
 
         -- Lua
-        builtins.formatting.stylua,
+        builtins.formatting.stylua.with({
+          extra_args = { "--indent-type=Spaces", "--indent-width=2", "--column_width=120" },
+        }),
 
         -- Python
         require("none-ls.diagnostics.flake8").with({
