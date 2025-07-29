@@ -18,7 +18,7 @@ return {
       local default_workspace = require("config").neorg.default_workspace
       local icon_presets = require("config").neorg.concealer.icon_presets
 
-      -- Neorg takes care of the workspaces, but not a commom root dir
+      -- Neorg takes care of the workspaces, but not a common root dir
       local ensure_dir_exists = require("util").ensure_dir_exists
       ensure_dir_exists(neorg_home)
 
