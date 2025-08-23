@@ -20,6 +20,7 @@ return {
       { "hrsh7th/cmp-nvim-lsp" },     -- Required
       { "hrsh7th/cmp-buffer" },       -- Optional
       { "hrsh7th/cmp-path" },         -- Optional
+      { "hrsh7th/cmp-cmdline" },      -- Optional
       { "saadparwaiz1/cmp_luasnip" }, -- Optional
       { "hrsh7th/cmp-nvim-lua" },     -- Optional
       { "windwp/nvim-autopairs" },    -- Optional
@@ -186,6 +187,27 @@ return {
             winhighlight = "Normal:NormalFloat," .. "FloatBorder:FloatBorder," .. "Search:None",
           }),
         },
+      })
+      -- `:` cmdline setup.
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" }
+        }, {
+          {
+            name = "cmdline",
+            option = {
+              ignore_cmds = { "Man", "!" },
+            }
+          }
+        })
+      })
+      -- `/` cmdline setup.
+      cmp.setup.cmdline('/', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'buffer' },
+        }
       })
 
       ---@diagnostic disable-next-line: missing-fields
