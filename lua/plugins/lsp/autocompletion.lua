@@ -15,19 +15,9 @@ return {
       { "windwp/nvim-autopairs" },    -- Optional
 
       -- Snippets
-      { "L3MON4D3/LuaSnip" },             -- Required
-      { "rafamadriz/friendly-snippets" }, -- Optional
+      { "L3MON4D3/LuaSnip" }, -- Required
     },
     config = function()
-      -- LuaSnip
-      local luasnip = require("luasnip")
-
-      luasnip.config.setup({})
-      require("luasnip.loaders.from_vscode").lazy_load()
-
-      local snippets_dir = vim.fn.stdpath("config") .. "/snippets"
-      require("luasnip.loaders.from_lua").load({ paths = { snippets_dir } })
-
       -- Nvim-CMP
       local cmp = require("cmp")
 
@@ -41,6 +31,7 @@ return {
         end
       end
 
+      local luasnip = require("luasnip")
       ---@diagnostic disable-next-line: missing-fields
       cmp.setup({
         snippet = {
