@@ -74,7 +74,12 @@ return {
         -- JS & TS
         require("none-ls.diagnostics.eslint_d"),
         builtins.formatting.prettier.with({
+          disabled_filetypes = { "javascriptreact" },
           extra_args = { "--single-quote", "false", "--tab-width", "4" },
+        }),
+        builtins.formatting.prettier.with({
+          filetypes = { "javascriptreact" },
+          extra_args = { "--single-quote", "false", "--tab-width", "2" },
         }),
 
         -- Java
