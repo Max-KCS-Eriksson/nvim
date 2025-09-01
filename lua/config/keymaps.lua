@@ -14,9 +14,12 @@ map("n", "<leader>Q", "<cmd>qa<cr>", { desc = "Quit all" })
 map("n", "<leader><leader>", "<C-6>", { desc = "Jump to previous buffer" }) -- <C-6> should be the same as <C-^>
 map("n", "<A-Tab>", "<C-w>w", { desc = "Switch windows" })
 map("n", "<leader><Tab>", "<C-w>w", { desc = "Switch windows" })
+map("n", "<leader>sc", "<cmd>only<cr>", { desc = "Close all other windows" })
 map("n", "<leader>sv", "<C-w>v", { desc = "Split vertically" })
 map("n", "<leader>ss", "<C-w>v", { desc = "Split side" })
 map("n", "<leader>sh", "<C-w>s", { desc = "Split horizontally" })
+map("n", "<C-<>", "<C-w><", { desc = "Decrease window width" })
+map("n", "<C->>", "<C-w>>", { desc = "Increase window width" })
 
 map("n", "zfs", "<cmd>normal ^[izf]i+<cr>", { desc = "Fold scope" })
 map("n", "zfm", "<cmd>normal ^[izf]i+]mzt<cr>", { desc = "Fold method" })
