@@ -32,6 +32,9 @@ return {
           { "]", group = "+next" },
           { "[", group = "+prev" },
           { "<leader>", group = "+leader" },
+          -- TODO: Remove occurrences from below in other files
+          -- If duplicates occur - extract and define in single location, that can be used universally
+          -- Use extracted mapping prefixes to enforce mapping conventions
           { "<leader>!", group = "+diagnostics/quickfixes" },
           { "<leader>f", group = "+find" },
           { "<leader>f!", group = "+diagnostics/todo" },

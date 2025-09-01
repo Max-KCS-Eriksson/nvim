@@ -24,7 +24,7 @@ return {
 
       local modules = {
         ["core.defaults"] = {}, -- Loads default behaviour
-        ["core.dirman"] = {     -- Neorg workspaces
+        ["core.dirman"] = { -- Neorg workspaces
           config = {
             workspaces = workspaces,
             default_workspace = default_workspace,

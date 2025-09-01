@@ -4,7 +4,7 @@ return {
   {
     "folke/todo-comments.nvim",
     dependencies = {
-      "nvim-lua/plenary.nvim",         -- Required
+      "nvim-lua/plenary.nvim", -- Required
       "nvim-telescope/telescope.nvim", -- Optional
     },
     config = function()
@@ -16,9 +16,9 @@ return {
         keywords = {
           FIX = {
             icon = icons.todo.FIX,
-            color = "error",                            -- Can be a hex color, or a named color (see docs). Affects signcolumn
+            color = "error", -- Can be a hex color, or a named color (see docs). Affects signcolumn
             alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- Keyword variants
-            signs = true,                               -- Signs for individual keywords
+            signs = true, -- Signs for individual keywords
           },
           TODO = { icon = icons.todo.TODO, color = colors.orange },
           HACK = { icon = icons.todo.HACK, color = "warning" },
