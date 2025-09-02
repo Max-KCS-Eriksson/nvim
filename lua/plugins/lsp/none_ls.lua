@@ -72,7 +72,7 @@ return {
         builtins.formatting.gofumpt,
 
         -- JS & TS
-        require("none-ls.diagnostics.eslint_d"),
+        require("none-ls.diagnostics.eslint"),
         builtins.formatting.prettier.with({
           disabled_filetypes = { "javascriptreact" },
           extra_args = { "--single-quote", "false", "--tab-width", "4" },
