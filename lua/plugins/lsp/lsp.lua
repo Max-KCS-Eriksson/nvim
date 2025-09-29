@@ -96,10 +96,10 @@ return {
         virtual_text = config.diagnostic.options.virtual_text,
       })
 
-      -- Nvim-CMP, LuaSnip, and Auto Pair setup
+      -- Nvim-CMP, and Auto Pair setup
       require("plugins.lsp.autocompletion")
 
-      -- Lsp UI
+      -- LSP UI
       require("lspconfig.ui.windows").default_options.border = config.window_border
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
         border = config.window_border,
