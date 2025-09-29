@@ -129,7 +129,7 @@ return {
           border = config.window_border,
         },
         -- Turn off floating window until toggle key is pressed again
-        toggle_key_flip_floatwin_setting = true,
+        toggle_key_flip_floatwin_setting = false,
         -- Virtual hint
         hint_enable = false,
         hint_prefix = "? ",
@@ -139,7 +139,6 @@ return {
         end,
         hi_parameter = "LspSignatureActiveParameter", -- Highlight group
       })
-      -- NOTE: Requires toggle to show signature next time.
       map("i", "<C-k>", function()
         require("lsp_signature").toggle_float_win()
       end, { desc = "toggle signature" })
