@@ -75,7 +75,9 @@ end, { desc = "Open root/dir/notes.norg file" })
 
 -- Move blocks of code in visual mode
 map("v", "J", ":m'>+1<CR>gv=gv", { desc = "Move block down" })
+map("v", "<A-Down>", ":m'>+1<CR>gv=gv", { desc = "Move block down" })
 map("v", "K", ":m'<-2<CR>gv=gv", { desc = "Move block up" })
+map("v", "<A-Up>", ":m'<-2<CR>gv=gv", { desc = "Move block up" })
 
 -- Makes * and # work in visual mode like in normal mode
 vim.api.nvim_exec(
