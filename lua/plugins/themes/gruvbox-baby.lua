@@ -273,6 +273,9 @@ return {
       hl(0, "TodoBgFIX", { bg = colors.red, fg = colors.dark, bold = true })
       hl(0, "TodoFgFIX", { fg = colors.red, bold = true })
 
+      -- LSP Signature
+      hl(0, "LspSignatureActiveParameter", { background = colors.dim })
+
       -- Text files
       for i = 1, 6, 1 do
         hl(0, "@text.title." .. i .. ".marker.markdown", heading_styles[i])
