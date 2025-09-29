@@ -19,6 +19,7 @@ return {
 
       -- HTML snippets for ReactJS
       luasnip.filetype_extend("javascriptreact", { "html" })
+      luasnip.filetype_extend("javascriptreact", { "javascript" })
     end,
   },
 }
