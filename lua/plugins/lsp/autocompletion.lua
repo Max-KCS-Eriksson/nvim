@@ -67,13 +67,13 @@ return {
           end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lsp" },
           {
             name = "luasnip",
             group_index = 1,
             option = { use_show_condition = true },
             entry_filter = get_entry_filter_function(),
           },
+          { name = "nvim_lsp" },
           { name = "buffer" },
           { name = "path" },
         }),
