@@ -74,12 +74,8 @@ return {
         -- JS & TS
         require("none-ls.diagnostics.eslint"),
         builtins.formatting.prettier.with({
-          disabled_filetypes = { "javascriptreact" },
-          extra_args = { "--single-quote", "false", "--tab-width", "4" },
-        }),
-        builtins.formatting.prettier.with({
-          filetypes = { "javascriptreact" },
-          extra_args = { "--single-quote", "false", "--tab-width", "2" },
+          prefer_local = "node_modules/.bin",
+          extra_args = { "--stdin-filepath", "$FILENAME" },
         }),
 
         -- Java
