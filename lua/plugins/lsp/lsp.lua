@@ -118,8 +118,9 @@ return {
     event = "VeryLazy",
     opts = {},
     config = function()
-      -- LSP_Signature settings
-      require("lsp_signature").setup({
+      local signature = require("lsp_signature")
+      -- Settings
+      signature.setup({
         bind = true, -- This is mandatory, otherwise border config won't get registered.
         always_trigger = true,
         -- Floating Window
@@ -139,11 +140,13 @@ return {
         end,
         hi_parameter = "LspSignatureActiveParameter", -- Highlight group
       })
+
+      -- Keys
       map("i", "<C-k>", function()
-        require("lsp_signature").toggle_float_win()
+        signature.toggle_float_win()
       end, { desc = "toggle signature" })
       map("i", "<C-s>", function()
-        require("lsp_signature").signature({ trigger = "NextSignature" }) -- Cycle alternative signatures
+        signature.signature({ trigger = "NextSignature" }) -- Cycle alternative signatures
       end, { desc = "select signature" })
     end,
   },
