@@ -1,10 +1,11 @@
-local function augroup(name)
+local M = {}
+function M.augroup(name)
   return vim.api.nvim_create_augroup("augroup_" .. name, { clear = true })
 end
 
 -- Active window options
 vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter", "VimEnter" }, {
-  group = augroup("active_win_opts"),
+  group = M.augroup("active_win_opts"),
   callback = function()
     vim.opt_local.cursorline = true
   end,
@@ -12,7 +13,7 @@ vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter", "VimEnter" }, {
 
 -- Inactive window options
 vim.api.nvim_create_autocmd("WinLeave", {
-  group = augroup("inactive_win_opts"),
+  group = M.augroup("inactive_win_opts"),
   callback = function()
     vim.opt_local.cursorline = false
     vim.api.nvim_set_hl(0, "LineNR", { link = "InactiveLineNR" })
@@ -21,14 +22,14 @@ vim.api.nvim_create_autocmd("WinLeave", {
 
 -- Check if we need to reload the file when it changed
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
-  group = augroup("checktime"),
+  group = M.augroup("checktime"),
   command = "checktime",
 })
 
 -- Highlight on yank
 --   See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup("highlight_yank"),
+  group = M.augroup("highlight_yank"),
   callback = function()
     vim.highlight.on_yank()
   end,
@@ -36,7 +37,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- Resize splits if window got resized
 vim.api.nvim_create_autocmd("VimResized", {
-  group = augroup("resize_splits"),
+  group = M.augroup("resize_splits"),
   callback = function()
     vim.cmd("tabdo wincmd =")
   end,
@@ -44,7 +45,7 @@ vim.api.nvim_create_autocmd("VimResized", {
 
 -- Go to last location when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
-  group = augroup("last_loc"),
+  group = M.augroup("last_loc"),
   callback = function()
     local mark = vim.api.nvim_buf_get_mark(0, '"')
     local lcount = vim.api.nvim_buf_line_count(0)
@@ -56,7 +57,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- Close some filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("close_with_q"),
+  group = M.augroup("close_with_q"),
   pattern = {
     "PlenaryTestPopup",
     "help",
@@ -68,6 +69,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "startuptime",
     "tsplayground",
     "checkhealth",
+    "gitsigns-blame",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -83,7 +85,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("wrap_spell"),
+  group = M.augroup("wrap_spell"),
   pattern = { "gitcommit", "markdown" },
   callback = function()
     vim.opt_local.wrap = true
@@ -93,7 +95,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Always open help and man in vertical split
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("vertical_help"),
+  group = M.augroup("vertical_help"),
   pattern = {
     "help",
     "man",
@@ -105,7 +107,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Set formatoptions for all filetypes
 vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("global_formatoptions"),
+  group = M.augroup("global_formatoptions"),
   pattern = "*",
   callback = function()
     vim.opt.formatoptions:remove("o")
@@ -116,7 +118,7 @@ vim.api.nvim_create_autocmd("FileType", {
 -- NOTE: External requirements:
 --   xorg xset xdotool
 vim.api.nvim_create_autocmd({ "InsertLeave", "CmdlineLeave" }, {
-  group = augroup("auto_no_capslock"),
+  group = M.augroup("auto_no_capslock"),
   callback = function()
     -- Check with `xset` if Caps Lock is on
     local _, _, caps_state = vim.fn.system("xset -q"):find("00: Caps Lock:%s+(%a+)")
@@ -174,3 +176,5 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     vim.diagnostic.disable(context.buf)
   end,
 })
+
+return M
