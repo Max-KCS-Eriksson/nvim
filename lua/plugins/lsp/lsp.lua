@@ -119,6 +119,8 @@ return {
     opts = {},
     config = function()
       local signature = require("lsp_signature")
+      vim.g.hack_lsp_signature_float = true -- HACK: Used to reset floating window to `true`
+
       -- Settings
       signature.setup({
         bind = true, -- This is mandatory, otherwise border config won't get registered.
@@ -130,7 +132,7 @@ return {
           border = config.window_border,
         },
         -- Turn off floating window until toggle key is pressed again
-        toggle_key_flip_floatwin_setting = false,
+        toggle_key_flip_floatwin_setting = true,
         -- Virtual hint
         hint_enable = false,
         hint_prefix = "? ",
@@ -144,10 +146,23 @@ return {
       -- Keys
       map("i", "<C-k>", function()
         signature.toggle_float_win()
+        vim.g.hack_lsp_signature_float = not vim.g.hack_lsp_signature_float
       end, { desc = "toggle signature" })
       map("i", "<C-s>", function()
         signature.signature({ trigger = "NextSignature" }) -- Cycle alternative signatures
       end, { desc = "select signature" })
+
+      -- HACK: Retoggle signature help floating window
+      vim.g.hack_lsp_signature_float = true
+      vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+        group = require("config.autocmds").augroup("retoggle_signature_float_win"),
+        callback = function()
+          if not vim.g.hack_lsp_signature_float then
+            signature.toggle_float_win()
+            vim.g.hack_lsp_signature_float = true
+          end
+        end,
+      })
     end,
   },
 }
