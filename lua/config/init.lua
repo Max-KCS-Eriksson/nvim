@@ -1,3 +1,13 @@
+vim.filetype.add({
+  pattern = {
+    -- Treat directory shell config and script files as Bash files
+    ["%.auto"] = "bash",
+    ["%.conf"] = "bash",
+    ["%.run"] = "bash",
+    ["%.script"] = "bash",
+  },
+})
+
 local M = {}
 
 -- Twilight
