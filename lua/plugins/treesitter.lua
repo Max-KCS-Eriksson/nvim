@@ -1,6 +1,14 @@
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
+})
+
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "master", -- Backward compatability for Nvim 0.11
     build = ":TSUpdate",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-context", -- Optional
