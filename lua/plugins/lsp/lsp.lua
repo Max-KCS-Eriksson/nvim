@@ -109,7 +109,8 @@ return {
 
   {
     -- Make lua_ls aware of the nvim lua API
-    "folke/neodev.nvim",
+    "folke/lazydev.nvim",
+    ft = "lua",
     opts = {},
   },
 
