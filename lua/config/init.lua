@@ -7,6 +7,11 @@ vim.filetype.add({
     ["%.script"] = "bash",
   },
 })
+vim.filetype.add({
+  pattern = {
+    ["nginx.*%.conf.*"] = "nginx",
+  },
+})
 
 local M = {}
 
