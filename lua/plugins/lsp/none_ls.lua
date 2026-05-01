@@ -75,7 +75,7 @@ return {
         require("none-ls.diagnostics.eslint"),
         builtins.formatting.prettier.with({
           prefer_local = "node_modules/.bin",
-          extra_args = { "--stdin-filepath", "$FILENAME" },
+          extra_args = { "--stdin-filepath", "$FILENAME", "--print-width", "120" },
         }),
 
         -- Java
