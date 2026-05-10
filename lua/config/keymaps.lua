@@ -58,20 +58,22 @@ end, { desc = "Terminal in CWD" })
 map("n", "<leader>on", function()
   local util = require("util")
   local cwd = os.getenv("PWD")
-  local note_file = cwd .. "/notes.norg"
+  local notes_md = cwd .. "/notes.md"
+  local notes_norg = cwd .. "/notes.norg"
 
-  if not util.open_existing_writable(note_file) then
+  if not util.open_existing_writable(notes_md) or util.open_existing_writable(notes_norg) then
     local git_root = util.get_git_root()
     if git_root then
-      note_file = git_root .. "/notes.norg"
-      if not util.open_existing_writable(note_file) then
-        print("notes.norg not found in " .. git_root)
+      notes_md = git_root .. "/notes.md"
+      notes_norg = git_root .. "/notes.norg"
+      if not util.open_existing_writable(notes_md) or util.open_existing_writable(notes_norg) then
+        print("personal notes not found in " .. git_root)
       end
     else
-      print("notes.norg not found in " .. cwd)
+      print("personal notes not found in " .. cwd)
     end
   end
-end, { desc = "Open root/dir/notes.norg file" })
+end, { desc = "Open root/dir/notes.* file" })
 
 -- Move blocks of code in visual mode
 map("v", "J", ":m'>+1<CR>gv=gv", { desc = "Move block down" })
