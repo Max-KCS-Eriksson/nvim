@@ -28,6 +28,159 @@ local features = {
   debugger = false, -- requires: nvim-dap, java-test and java-debug-adapter
 }
 
+local function resolve_java_home(...)
+  local base = vim.fn.expand("~/.local/share/mise/installs/java")
+  local candidates = {}
+  local seen = {}
+
+  local function add_candidate(candidate)
+    if candidate ~= "" and seen[candidate] == nil then
+      table.insert(candidates, candidate)
+      seen[candidate] = true
+    end
+  end
+
+  for _, version in ipairs({ ... }) do
+    add_candidate(base .. "/" .. version)
+
+    for _, candidate in ipairs(vim.fn.glob(base .. "/" .. version .. "*", false, true)) do
+      add_candidate(candidate)
+    end
+  end
+
+  for _, candidate in ipairs(candidates) do
+    if vim.fn.executable(candidate .. "/bin/java") == 1 then
+      return candidate
+    end
+  end
+end
+
+local function java_runtime_name(version)
+  if version == nil or version == "" then
+    return nil
+  end
+
+  local normalized = version:gsub("^java@", "")
+  local major = normalized:match("^1%.(%d+)") or normalized:match("^(%d+)") or normalized:match("%-(%d+)")
+
+  if major == nil then
+    return nil
+  end
+
+  if major == "8" then
+    return "JavaSE-1.8"
+  end
+
+  return "JavaSE-" .. major
+end
+
+local function find_upward_file(names, start_path)
+  local dir = start_path
+
+  if dir == nil or dir == "" then
+    dir = vim.fn.getcwd()
+  end
+
+  if vim.fn.isdirectory(dir) == 0 then
+    dir = vim.fn.fnamemodify(dir, ":h")
+  end
+
+  while dir ~= "" do
+    for _, name in ipairs(names) do
+      local candidate = dir .. "/" .. name
+
+      if vim.fn.filereadable(candidate) == 1 then
+        return candidate
+      end
+    end
+
+    local parent = vim.fn.fnamemodify(dir, ":h")
+
+    if parent == dir then
+      break
+    end
+
+    dir = parent
+  end
+end
+
+local function java_version_from_mise_toml(file)
+  local ok, lines = pcall(vim.fn.readfile, file)
+
+  if not ok then
+    return nil
+  end
+
+  local in_tools = false
+
+  for _, line in ipairs(lines) do
+    local trimmed = vim.trim(line:gsub("#.*$", ""))
+    local section = trimmed:match("^%[([^%]]+)%]$")
+
+    if section ~= nil then
+      in_tools = section == "tools"
+    elseif in_tools then
+      local version = trimmed:match("^java%s*=%s*[\"']([^\"']+)[\"']")
+
+      if version ~= nil then
+        return version
+      end
+    end
+  end
+end
+
+local function java_version_from_tool_versions(file)
+  local ok, lines = pcall(vim.fn.readfile, file)
+
+  if not ok then
+    return nil
+  end
+
+  for _, line in ipairs(lines) do
+    local version = line:match("^%s*java%s+([^%s#]+)")
+
+    if version ~= nil then
+      return version
+    end
+  end
+end
+
+local function project_java_version(start_path)
+  local file = find_upward_file({ "mise.toml", ".mise.toml", ".tool-versions" }, start_path)
+
+  if file == nil then
+    return nil
+  end
+
+  if vim.endswith(file, ".tool-versions") then
+    return java_version_from_tool_versions(file)
+  end
+
+  return java_version_from_mise_toml(file)
+end
+
+local function java_runtimes_with_default(runtimes, default_java_version)
+  local default_runtime = java_runtime_name(default_java_version)
+  local configured = {}
+
+  for _, runtime in ipairs(runtimes) do
+    if runtime.path ~= nil then
+      local entry = {
+        name = runtime.name,
+        path = runtime.path,
+      }
+
+      if runtime.name == default_runtime then
+        entry.default = true
+      end
+
+      table.insert(configured, entry)
+    end
+  end
+
+  return configured
+end
+
 local function get_jdtls_paths()
   -- Get all paths needed to start LSP server
   if cache_vars.paths then
@@ -37,6 +190,8 @@ local function get_jdtls_paths()
   local path = {}
 
   path.data_dir = vim.fn.stdpath("cache") .. "/nvim-jdtls"
+  path.java_home = resolve_java_home("21")
+  path.java_bin = path.java_home and (path.java_home .. "/bin/java") or vim.fn.exepath("java")
 
   local jdtls_install = require("mason-registry").get_package("jdtls"):get_install_path()
 
@@ -69,7 +224,7 @@ local function get_jdtls_paths()
   local java_debug_path = require("mason-registry").get_package("java-debug-adapter"):get_install_path()
 
   local java_debug_bundle =
-    vim.split(vim.fn.glob(java_debug_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar"), "\n")
+      vim.split(vim.fn.glob(java_debug_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar"), "\n")
 
   if java_debug_bundle[1] ~= "" then
     vim.list_extend(path.bundles, java_debug_bundle)
@@ -83,19 +238,19 @@ local function get_jdtls_paths()
     -- https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
     {
       name = "JavaSE-1.8",
-      path = vim.fn.expand("~/.local/share/mise/installs/java/adoptopenjdk-8"),
+      path = resolve_java_home("temurin-8", "adoptopenjdk-8", "8"),
     },
     {
       name = "JavaSE-11",
-      path = vim.fn.expand("~/.local/share/mise/installs/java/11"),
+      path = resolve_java_home("11"),
     },
     {
       name = "JavaSE-17",
-      path = vim.fn.expand("~/.local/share/mise/installs/java/17"),
+      path = resolve_java_home("17"),
     },
     {
       name = "JavaSE-21",
-      path = vim.fn.expand("~/.local/share/mise/installs/java/21"),
+      path = path.java_home,
     },
   }
 
@@ -130,7 +285,7 @@ local function enable_debugger(bufnr)
   local has_wk, wk = pcall(require, "which-key")
   if has_wk then
     wk.add({
-      { "<leader>d", group = "+debugger" },
+      { "<leader>d",  group = "+debugger" },
       { "<leader>dt", group = "+test" },
     })
   end
@@ -159,7 +314,7 @@ local function jdtls_on_attach(client, bufnr)
     wk.add({
       {
         mode = { "n", "v" },
-        { "<leader>c", group = "+code" },
+        { "<leader>c",  group = "+code" },
         { "<leader>ce", group = "+extract" },
       },
     })
@@ -177,6 +332,10 @@ local function jdtls_setup(event)
   local jdtls = require("jdtls")
 
   local path = get_jdtls_paths()
+  local root_dir = jdtls.setup.find_root(root_files)
+  local buf_path = vim.api.nvim_buf_get_name(event.buf)
+  local project_dir = root_dir or vim.fn.fnamemodify(buf_path, ":p:h")
+  local configured_java_version = project_java_version(project_dir)
   local data_dir = path.data_dir .. "/" .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 
   if cache_vars.capabilities == nil then
@@ -193,7 +352,7 @@ local function jdtls_setup(event)
   -- The command that starts the language server
   -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
   local cmd = {
-    "java",
+    path.java_bin,
 
     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
     "-Dosgi.bundles.defaultStartLevel=4",
@@ -233,7 +392,7 @@ local function jdtls_setup(event)
       },
       configuration = {
         updateBuildConfiguration = "interactive",
-        runtimes = path.runtimes,
+        runtimes = java_runtimes_with_default(path.runtimes, configured_java_version),
       },
       maven = {
         downloadSources = true,
@@ -296,7 +455,7 @@ local function jdtls_setup(event)
     settings = lsp_settings,
     on_attach = jdtls_on_attach,
     capabilities = cache_vars.capabilities,
-    root_dir = jdtls.setup.find_root(root_files),
+    root_dir = root_dir,
     flags = {
       allow_incremental_sync = true,
     },
